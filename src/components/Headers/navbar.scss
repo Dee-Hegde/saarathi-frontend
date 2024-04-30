@@ -1,0 +1,64 @@
+@import '../../styles/global.scss';
+
+.navbar-container {
+  width: 100%;
+  height: 65px;
+  @include flexBox($justify: space-between);
+  padding: 10px 24px;
+  .logo-container {
+    width: fit-content;
+    max-width: 20%;
+    @include flexBox();
+    img {
+      width: 100%;
+      height: 40px;
+    }
+  }
+  .link-container {
+    @include flexBox();
+    .link-wrapper {
+      @include flexBox($gap: 48px);
+      li {
+        @include fontStyles($size: 16px);
+        list-style: none;
+      }
+    }
+  }
+  .user-info-container {
+    @include flexBox();
+  }
+}
+.user-details-links {
+  width: 100%;
+  min-width: 200px;
+  max-width: 250px;
+  padding: 24px;
+  cursor: pointer;
+  background-color: var(--primary-background);
+  color: var(--primary-text);
+  @include flexBox(
+    $direction: column,
+    $justify: flex-start,
+    $align: flex-start,
+    $gap: 12px
+  );
+  .options-container {
+    width: 100%;
+    @include flexBox($justify: flex-start, $align: center, $gap: 6px);
+    span {
+      @include fontStyles();
+    }
+  }
+  .mode-icon {
+    width: 16px;
+    height: 16px;
+    svg {
+      path {
+        color: white;
+      }
+    }
+  }
+}
+.ant-popover .ant-popover-inner {
+  padding: 0px;
+}

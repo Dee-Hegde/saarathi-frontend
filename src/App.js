@@ -1,25 +1,53 @@
-import logo from './logo.svg';
-import './App.css';
+import { Route, Routes } from 'react-router-dom';
+import Login from './containers/Login';
+import UserLayouts from './routes/UserLayouts';
+import UserDashboard from './containers/UserDashboard/UserDashboard';
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+  const role = 'user';
+  const userFlow = [
+    { path: '/', element: 'UserDashboard' },
+    { path: '/applied', element: 'UserDashboard' },
+    { path: '/bookings', element: 'bookings' }
+  ];
+  const ownerFlow = [
+    { path: '/', element: 'OwnerDashboard' },
+    { path: '/posts', element: 'bookings' }
+  ];
+
+  if (!role) {
+    return <Login />;
+  } else {
+    return (
+      <Routes>
+        <Route path="/login" element={<Login />} />
+        {role === 'user' &&
+          userFlow.map((item, index) => (
+            <Route
+              key={index}
+              path={item.path}
+              element={
+                <UserLayouts>
+                  <UserDashboard />
+                </UserLayouts>
+              }
+            />
+          ))}
+        {role === 'owner' &&
+          ownerFlow.map((item, index) => (
+            <Route
+              key={index}
+              path={item.path}
+              element={
+                <UserLayouts>
+                  <UserDashboard />
+                </UserLayouts>
+              }
+            />
+          ))}
+      </Routes>
+    );
+  }
 }
 
 export default App;
